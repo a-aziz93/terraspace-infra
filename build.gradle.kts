@@ -10,6 +10,14 @@ plugins {
 group = "ai.tech"
 version = "1.0.0"
 
+sonarqube {
+    properties {
+        property ("sonar.projectKey", "a-aziz93_terraspace-infra")
+        property ("sonar.organization", "a-aziz93")
+        property ("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
 repositories {
     mavenCentral()
     this as ExtensionAware

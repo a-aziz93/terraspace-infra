@@ -5,9 +5,11 @@
 */
 
 job("Code analysis, up and and test") {
-    container(displayName = "Continuous inspection of code quality and security",image = "sonarsource/sonar-scanner-cli"){
-        env["SONAR_LOGIN"] = Secrets("sonar_token")
-        env["SONAR_HOST_URL"] = Params("sonar_host_url")
-        args("-Dsonar.projectKey=a-aziz93_infra","-Dsonar.organization=a-aziz93")
+    container(displayName = "Sonarqube continuous inspection of code quality and security", image = "openjdk:11")
+    {
+        env["SONAR_TOKEN"] = Secrets("terraspace_infra_sonar_token")
+        kotlinScript { api->
+            api.gradlew("sonarqube")
+        }
     }
 }
